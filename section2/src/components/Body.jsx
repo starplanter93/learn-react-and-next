@@ -1,9 +1,9 @@
-import React from 'react';
+import './Body.css';
 
 export default function Body() {
   return (
-    <header>
+    <div className='body'>
       <h1>Body</h1>
-    </header>
+    </div>
   );
 }
