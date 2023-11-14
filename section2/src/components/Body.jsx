@@ -1,44 +1,35 @@
 import { useState } from 'react';
 import './Body.css';
 
-function Lightbulb({ light }) {
-  return (
-    <>
-      {light === 'on' ? (
-        <div style={{ backgroundColor: 'orange' }}>on</div>
-      ) : (
-        <div style={{ backgroundColor: 'gray' }}>off</div>
-      )}
-    </>
-  );
-}
-
-function StaticLightbulb() {
-  console.log('static light bulb');
-  return <div style={{ backgroundColor: 'gray' }}>off</div>;
-}
-
 export default function Body() {
-  const [light, setLight] = useState('off');
+  const [value, setValue] = useState({
+    name: '',
+    gender: '',
+    bio: '',
+  });
+
+  const onChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <div className='body'>
-      <Lightbulb light={light} />
-      <StaticLightbulb />
-      <button
-        onClick={() => {
-          setLight('on');
-        }}
-      >
-        켜기
-      </button>
-      <button
-        onClick={() => {
-          setLight('off');
-        }}
-      >
-        끄기
-      </button>
+      <div>
+        <input name='name' value={value.name} onChange={onChange} />
+      </div>
+      <div>
+        <select name='gender' value={value.gender} onChange={onChange}>
+          <option value=''>밝히지 않음</option>
+          <option value='male'>남성</option>
+          <option value='female'>여성</option>
+        </select>
+      </div>
+      <div>
+        <textarea name='bio' value={value.bio} onChange={onChange} />
+      </div>
     </div>
   );
 }
