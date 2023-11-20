@@ -1,27 +1,21 @@
 import './App.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Controller from './components/Controller';
 import Viewer from './components/Viewer';
 import Even from './components/Even';
+import useUpdate from './hooks/useUpdate';
+import useInput from './hooks/useInput';
 
 function App() {
-  const isMountRef = useRef();
   const [count, setCount] = useState(0);
+  const [text, onChangeText] = useInput('');
 
   const onClickButton = (value) => {
     setCount(count + value);
   };
 
-  useEffect(() => {
-    console.log('마운트');
-  }, []);
-
-  useEffect(() => {
-    if (!isMountRef.current) {
-      isMountRef.current = true;
-      return;
-    }
-    console.log('업데이트');
+  useUpdate(() => {
+    console.log('APP UPDATE');
   });
 
   return (
@@ -36,6 +30,7 @@ function App() {
       <section>
         <Controller onClickButton={onClickButton} />
       </section>
+      <input value={text} onChange={onChangeText} />
     </div>
   );
 }
