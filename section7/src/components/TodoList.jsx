@@ -1,8 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useContext } from 'react';
 import TodoItem from './TodoItem';
 import './TodoList.css';
+import { TodoContext } from '../TodoContext';
 
-export default function TodoList({ todos, onUpdate, onDelete }) {
+export default function TodoList() {
+  const { todos } = useContext(TodoContext);
   const [search, setSearch] = useState('');
 
   const onChangeSearch = (e) => {
@@ -41,12 +43,7 @@ export default function TodoList({ todos, onUpdate, onDelete }) {
       <input placeholder='검색어를 입력하세요' onChange={onChangeSearch} />
       <div className='todos_wrapper'>
         {filterTodos().map((todo) => (
-          <TodoItem
-            key={todo.id}
-            {...todo}
-            onUpdate={onUpdate}
-            onDelete={onDelete}
-          />
+          <TodoItem key={todo.id} {...todo} />
         ))}
       </div>
     </div>
