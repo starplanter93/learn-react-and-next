@@ -9,7 +9,7 @@ export default function Home() {
   };
   return (
     <div>
-      HomePage
+      test HomePage
       <div>
         <button onClick={onClickButton}>search page 이동</button>
       </div>
