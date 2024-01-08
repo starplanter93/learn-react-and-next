@@ -1,26 +1,19 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
-export default function Home() {
-  const code = 'KOR';
-  const router = useRouter();
-  const onClickButton = () => {
-    router.push('/search');
-  };
-  return (
-    <div>
-      HomePage
-      <div>
-        <button onClick={onClickButton}>search page 이동</button>
-      </div>
-      <div>
-        <Link href={'/search'}>search page 이동</Link>
-      </div>
-      <div>
-        <Link href={{ pathname: '/country/[code]', query: { code: code } }}>
-          {code} page 이동
-        </Link>
-      </div>
-    </div>
-  );
+export default function Home({ name }) {
+  console.log('HOME');
+  useEffect(() => {
+    console.log('home effect');
+  }, []);
+
+  return <div>{name}</div>;
 }
+
+export const getServerSideProps = async () => {
+  console.log('getServerSideProps called');
+  return {
+    props: {
+      name: 'KOREA',
+    },
+  };
+};
