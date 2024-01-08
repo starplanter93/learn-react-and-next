@@ -1,19 +1,21 @@
 import { useEffect } from 'react';
+import { fetchCountries } from '@/api';
 
-export default function Home({ name }) {
-  console.log('HOME');
-  useEffect(() => {
-    console.log('home effect');
-  }, []);
-
-  return <div>{name}</div>;
+export default function Home({ countries }) {
+  return (
+    <div>
+      {countries.map((country) => (
+        <div key={country.code}>{country.commonName}</div>
+      ))}
+    </div>
+  );
 }
 
 export const getServerSideProps = async () => {
-  console.log('getServerSideProps called');
+  const countries = await fetchCountries();
   return {
     props: {
-      name: 'KOREA',
+      countries,
     },
   };
 };
