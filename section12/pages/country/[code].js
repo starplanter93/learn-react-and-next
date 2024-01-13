@@ -38,6 +38,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const { code } = context.params;
+  console.log(`${code} 페이지 생성`);
 
   let country = null;
   if (code) {
@@ -49,5 +50,6 @@ export const getStaticProps = async (context) => {
     props: {
       country,
     },
+    revalidate: 3,
   };
 };
